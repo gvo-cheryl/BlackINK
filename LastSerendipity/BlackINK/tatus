@@ -1,0 +1,89 @@
+[1mdiff --git a/target/classes/com/semi/tattoo/image/controller/multiUploadTest.class b/target/classes/com/semi/tattoo/image/controller/multiUploadTest.class[m
+[1mindex 5bd49e0..44b7848 100644[m
+Binary files a/target/classes/com/semi/tattoo/image/controller/multiUploadTest.class and b/target/classes/com/semi/tattoo/image/controller/multiUploadTest.class differ
+[1mdiff --git a/target/classes/com/semi/tattoo/image/controller/textsearchController.class b/target/classes/com/semi/tattoo/image/controller/textsearchController.class[m
+[1mindex 880595b..d9bcf4c 100644[m
+Binary files a/target/classes/com/semi/tattoo/image/controller/textsearchController.class and b/target/classes/com/semi/tattoo/image/controller/textsearchController.class differ
+[1mdiff --git a/target/classes/com/semi/tattoo/image/controller/visionController.class b/target/classes/com/semi/tattoo/image/controller/visionController.class[m
+[1mindex 5f7bab0..f157e9e 100644[m
+Binary files a/target/classes/com/semi/tattoo/image/controller/visionController.class and b/target/classes/com/semi/tattoo/image/controller/visionController.class differ
+[1mdiff --git a/target/classes/com/semi/tattoo/location/controller/locationController.class b/target/classes/com/semi/tattoo/location/controller/locationController.class[m
+[1mindex e6c8fd8..ffbd17b 100644[m
+Binary files a/target/classes/com/semi/tattoo/location/controller/locationController.class and b/target/classes/com/semi/tattoo/location/controller/locationController.class differ
+[1mdiff --git a/target/classes/com/semi/tattoo/login/controller/Delete.class b/target/classes/com/semi/tattoo/login/controller/Delete.class[m
+[1mindex 55feef7..fe7f750 100644[m
+Binary files a/target/classes/com/semi/tattoo/login/controller/Delete.class and b/target/classes/com/semi/tattoo/login/controller/Delete.class differ
+[1mdiff --git a/target/classes/com/semi/tattoo/login/controller/EmailckServlet.class b/target/classes/com/semi/tattoo/login/controller/EmailckServlet.class[m
+[1mindex 22fcb0b..049ed3c 100644[m
+Binary files a/target/classes/com/semi/tattoo/login/controller/EmailckServlet.class and b/target/classes/com/semi/tattoo/login/controller/EmailckServlet.class differ
+[1mdiff --git a/target/classes/com/semi/tattoo/login/controller/InterestTattoo.class b/target/classes/com/semi/tattoo/login/controller/InterestTattoo.class[m
+[1mindex d9e3843..d082a11 100644[m
+Binary files a/target/classes/com/semi/tattoo/login/controller/InterestTattoo.class and b/target/classes/com/semi/tattoo/login/controller/InterestTattoo.class differ
+[1mdiff --git a/target/classes/com/semi/tattoo/login/controller/KakaoLogin.class b/target/classes/com/semi/tattoo/login/controller/KakaoLogin.class[m
+[1mindex 9bad876..de2ff57 100644[m
+Binary files a/target/classes/com/semi/tattoo/login/controller/KakaoLogin.class and b/target/classes/com/semi/tattoo/login/controller/KakaoLogin.class differ
+[1mdiff --git a/target/classes/com/semi/tattoo/login/controller/KakaoLogout.class b/target/classes/com/semi/tattoo/login/controller/KakaoLogout.class[m
+[1mindex c9ee56b..836a4a1 100644[m
+Binary files a/target/classes/com/semi/tattoo/login/controller/KakaoLogout.class and b/target/classes/com/semi/tattoo/login/controller/KakaoLogout.class differ
+[1mdiff --git a/target/classes/com/semi/tattoo/login/controller/KakaoUpdate.class b/target/classes/com/semi/tattoo/login/controller/KakaoUpdate.class[m
+[1mindex ece719a..1f2f779 100644[m
+Binary files a/target/classes/com/semi/tattoo/login/controller/KakaoUpdate.class and b/target/classes/com/semi/tattoo/login/controller/KakaoUpdate.class differ
+[1mdiff --git a/target/classes/com/semi/tattoo/login/controller/KakaoUpdate01.class b/target/classes/com/semi/tattoo/login/controller/KakaoUpdate01.class[m
+[1mindex fd2823d..20a8b1f 100644[m
+Binary files a/target/classes/com/semi/tattoo/login/controller/KakaoUpdate01.class and b/target/classes/com/semi/tattoo/login/controller/KakaoUpdate01.class differ
+[1mdiff --git a/target/classes/com/semi/tattoo/login/controller/LoginProcServlet.class b/target/classes/com/semi/tattoo/login/controller/LoginProcServlet.class[m
+[1mindex 904281d..b3d5281 100644[m
+Binary files a/target/classes/com/semi/tattoo/login/controller/LoginProcServlet.class and b/target/classes/com/semi/tattoo/login/controller/LoginProcServlet.class differ
+[1mdiff --git a/target/classes/com/semi/tattoo/login/controller/LoginServlet.class b/target/classes/com/semi/tattoo/login/controller/LoginServlet.class[m
+[1mindex bc26cef..a28a1f6 100644[m
+Binary files a/target/classes/com/semi/tattoo/login/controller/LoginServlet.class and b/target/classes/com/semi/tattoo/login/controller/LoginServlet.class differ
+[1mdiff --git a/target/classes/com/semi/tattoo/login/controller/LogoutServlet.class b/target/classes/com/semi/tattoo/login/controller/LogoutServlet.class[m
+[1mindex 2296881..1769474 100644[m
+Binary files a/target/classes/com/semi/tattoo/login/controller/LogoutServlet.class and b/target/classes/com/semi/tattoo/login/controller/LogoutServlet.class differ
+[1mdiff --git a/target/classes/com/semi/tattoo/login/controller/Myhistory.class b/target/classes/com/semi/tattoo/login/controller/Myhistory.class[m
+[1mindex 5e6d06b..da18c89 100644[m
+Binary files a/target/classes/com/semi/tattoo/login/controller/Myhistory.class and b/target/classes/com/semi/tattoo/login/controller/Myhistory.class differ
+[1mdiff --git a/target/classes/com/semi/tattoo/login/controller/MypageUserServlet.class b/target/classes/com/semi/tattoo/login/controller/MypageUserServlet.class[m
+[1mindex 4cb4645..d809dec 100644[m
+Binary files a/target/classes/com/semi/tattoo/login/controller/MypageUserServlet.class and b/target/classes/com/semi/tattoo/login/controller/MypageUserServlet.class differ
+[1mdiff --git a/target/classes/com/semi/tattoo/login/controller/NaverLogin.class b/target/classes/com/semi/tattoo/login/controller/NaverLogin.class[m
+[1mindex 5891beb..08b080a 100644[m
+Binary files a/target/classes/com/semi/tattoo/login/controller/NaverLogin.class and b/target/classes/com/semi/tattoo/login/controller/NaverLogin.class differ
+[1mdiff --git a/target/classes/com/semi/tattoo/login/controller/PaymentData.class b/target/classes/com/semi/tattoo/login/controller/PaymentData.class[m
+[1mindex 7521fd5..755f6a4 100644[m
+Binary files a/target/classes/com/semi/tattoo/login/controller/PaymentData.class and b/target/classes/com/semi/tattoo/login/controller/PaymentData.class differ
+[1mdiff --git a/target/classes/com/semi/tattoo/login/controller/PaymentDetails.class b/target/classes/com/semi/tattoo/login/controller/PaymentDetails.class[m
+[1mindex 670c59f..d12fc82 100644[m
+Binary files a/target/classes/com/semi/tattoo/login/controller/PaymentDetails.class and b/target/classes/com/semi/tattoo/login/controller/PaymentDetails.class differ
+[1mdiff --git a/target/classes/com/semi/tattoo/login/controller/RegistServlet.class b/target/classes/com/semi/tattoo/login/controller/RegistServlet.class[m
+[1mindex f1100bb..ab983ea 100644[m
+Binary files a/target/classes/com/semi/tattoo/login/controller/RegistServlet.class and b/target/classes/com/semi/tattoo/login/controller/RegistServlet.class differ
+[1mdiff --git a/target/classes/com/semi/tattoo/login/controller/SearchEmail.class b/target/classes/com/semi/tattoo/login/controller/SearchEmail.class[m
+[1mindex 5d1690c..fba785b 100644[m
+Binary files a/target/classes/com/semi/tattoo/login/controller/SearchEmail.class and b/target/classes/com/semi/tattoo/login/controller/SearchEmail.class differ
+[1mdiff --git a/target/classes/com/semi/tattoo/login/controller/SearchPw.class b/target/classes/com/semi/tattoo/login/controller/SearchPw.class[m
+[1mindex 7a5560d..8c9e434 100644[m
+Binary files a/target/classes/com/semi/tattoo/login/controller/SearchPw.class and b/target/classes/com/semi/tattoo/login/controller/SearchPw.class differ
+[1mdiff --git a/target/classes/com/semi/tattoo/login/controller/Update.class b/target/classes/com/semi/tattoo/login/controller/Update.class[m
+[1mindex 7128c83..8fdb672 100644[m
+Binary files a/target/classes/com/semi/tattoo/login/controller/Update.class and b/target/classes/com/semi/tattoo/login/controller/Update.class differ
+[1mdiff --git a/target/classes/com/semi/tattoo/profile/controller/profileController.class b/target/classes/com/semi/tattoo/profile/controller/profileController.class[m
+[1mindex f082091..b9fc8e8 100644[m
+Binary files a/target/classes/com/semi/tattoo/profile/controller/profileController.class and b/target/classes/com/semi/tattoo/profile/controller/profileController.class differ
+[1mdiff --git a/target/classes/com/semi/tattoo/tattooshare/controller/tattooshareController.class b/target/classes/com/semi/tattoo/tattooshare/controller/tattooshareController.class[m
+[1mindex 1e3c41b..cb9f4f9 100644[m
+Binary files a/target/classes/com/semi/tattoo/tattooshare/controller/tattooshareController.class and b/target/classes/com/semi/tattoo/tattooshare/controller/tattooshareController.class differ
+[1mdiff --git a/target/m2e-wtp/web-resources/META-INF/maven/BlackINK/BlackINK/pom.properties b/target/m2e-wtp/web-resources/META-INF/maven/BlackINK/BlackINK/pom.properties[m
+[1mindex fd6e6aa..0aa0f80 100644[m
+[1m--- a/target/m2e-wtp/web-resources/META-INF/maven/BlackINK/BlackINK/pom.properties[m
+[1m+++ b/target/m2e-wtp/web-resources/META-INF/maven/BlackINK/BlackINK/pom.properties[m
+[36m@@ -1,7 +1,7 @@[m
+ #Generated by Maven Integration for Eclipse[m
+[31m-#Fri Oct 02 00:16:34 KST 2020[m
+[32m+[m[32m#Fri Oct 02 04:36:29 KST 2020[m
+ version=0.0.1-SNAPSHOT[m
+ groupId=BlackINK[m
+ m2e.projectName=BlackINK[m
+[31m-m2e.projectLocation=C\:\\Users\\yhner\\OneDrive\\\uBB38\uC11C\\ThirdSemi\\BlackINK[m
+[32m+[m[32mm2e.projectLocation=C\:\\Users\\ckr44\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\git[m
+ artifactId=BlackINK[m

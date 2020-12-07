@@ -1,0 +1,82 @@
+@import "reset.css";
+
+body {
+  background-color: #f6f9fc;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 50px;
+}
+
+.canvas {
+  width: 400px;
+  height: 400px;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 7%;
+  margin-bottom: 30px;
+  background-color: white;
+}
+
+.controls {
+  padding: 0px 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.controls .buttons {
+  padding: 10px 20px;
+}
+.controls button {
+  all: unset;
+  cursor: pointer;
+  background-color: white;
+  text-transform: uppercase;
+  border-radius: 5px;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+  padding: 5px 5px;
+  font-weight: 400;
+  text-align: center;
+}
+
+.controls button:active {
+  transform: scale(0.98);
+}
+
+.color__btns {
+  display: flex;
+}
+.color__btns .color__btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  margin: 0px 2px;
+  border: 2px lighter black;
+  cursor: pointer;
+}
+
+.color__btns .color__btn:active {
+  transform: scale(0.98);
+}
+
+.color__btns #transparent {
+  background-color: #eee;
+  background-image: linear-gradient(
+      45deg,
+      #999 25%,
+      transparent 25%,
+      transparent 75%,
+      #999 75%,
+      #999
+    ),
+    linear-gradient(
+      45deg,
+      #999 25%,
+      transparent 25%,
+      transparent 75%,
+      #999 75%,
+      #999
+    );
+  background-size: 20px 20px; /*이미지너비 이미지 높이*/
+  background-position: 0 0, 10px 10px; /*linear-gredient의 각 위치*/
+}

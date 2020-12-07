@@ -1,0 +1,63 @@
+@charset "UTF-8";
+
+*{
+	margin: 0px;
+	padding: 0px;
+	
+}
+
+#mainWrap{
+	width: 93.5%;
+	height: 470px;
+	border: 0.5px solid grey;
+	position: relative;
+	top: 30px;
+	left: 30px;
+}
+
+#mainWrap hr {
+	position: absolute;
+	top: 65px;
+	left: 18px;
+}
+
+#topWrap{
+	padding: 20px;
+	
+}
+
+
+.topTitle{
+	display: block;
+	width: 100%;
+	border: 1px solid grey;
+	height: 40px;
+	font-size: 18pt;
+}
+
+.topName{
+	display: block;
+	width: 100%;
+	border: 1px solid grey;
+	height: 24px;
+	margin-top: 10px;
+	font-size: 12pt;
+}
+
+#bottomWrap {
+	width: 94.5%;
+	
+	padding: 20px;
+}
+
+
+
+#buttonWrap {
+	width: 94.5%;
+	padding: 20px;	
+}
+
+
+#buttonWrap input:nth-child(2) {
+	margin-left: 15px;
+}

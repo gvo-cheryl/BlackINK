@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;BlackINK/WebContent/callback.jsp&apos; to &apos;naver_callback.jsp&apos;" description="Rename resource &apos;callback.jsp&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="WebContent/callback.jsp" name="naver_callback.jsp" stamp="1603525172375" updateReferences="true"/>
+</session>

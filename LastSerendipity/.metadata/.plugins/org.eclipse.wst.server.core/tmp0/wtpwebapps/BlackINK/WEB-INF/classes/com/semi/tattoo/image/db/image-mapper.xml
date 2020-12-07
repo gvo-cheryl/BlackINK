@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.semi.tattoo.image">
+
+	<resultMap type="imageDto" id="imageDtoMap">
+		<result property="im_no" column="IM_NO" />
+		<result property="me_no" column="ME_NO" />
+		<result property="im_filename" column="IM_FILENAME" />
+		<result property="im_servername" column="IM_SERVERNAME" />
+		<result property="im_filepath" column="IM_FILEPATH" />
+		<result property="im_regdate" column="IM_REGDATE" />
+		<result property="me_nic" column="ME_NIC"/>
+		<result property="ts_title" column="ts_title"/>
+		<result property="ts_no" column="ts_no"/>
+	</resultMap>
+
+	<insert id="insertImageList" parameterType="map">
+		INSERT INTO IMG(IM_NO, ME_NO, IM_FILENAME, IM_SERVERNAME, IM_FILEPATH, IM_REGDATE)
+		SELECT IM_NO_SEQ.NEXTVAL, A.* FROM(
+		<foreach collection="list" item="item" separator="UNION ALL" >
+			SELECT #{item.me_no} AS ME_NO,
+					#{item.im_filename} AS IM_FILENAME,
+					#{item.im_servername} AS IM_SERVERNAME,
+					#{item.im_filepath} AS IM_FILEPATH,
+					SYSDATE AS IM_REGDATE
+			FROM DUAL
+		</foreach>)A
+	</insert>
+	<select id="selectOne" parameterType="map" resultType="INTEGER">
+		SELECT IM_NO FROM IMG
+		<foreach collection="list" item="item">
+			WHERE ME_NO = #{item.me_no}
+			AND IM_SERVERNAME = #{item.im_servername}
+		</foreach>
+	</select>
+	<select id="selectBeforeList" parameterType="imageDto" resultMap="imageDtoMap">
+		SELECT IM_NO, ME_NO, ME_NIC, IM_SERVERNAME, IM_FILEPATH
+		FROM IMG JOIN MEMBER USING(ME_NO)
+		WHERE ME_NO = #{me_no}
+		AND
+		<if test="im_servername_list != null" >
+		IM_SERVERNAME IN
+			<foreach collection="im_servername_list" item="item" index="index" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
+		ORDER BY IM_NO
+	</select>
+	<select id="selectSamplelist" parameterType="int" resultMap="imageDtoMap">
+		SELECT T.ME_NO, IM_NO, IM_FILENAME, IM_SERVERNAME, IM_FILEPATH, IM_REGDATE, TS_TITLE, TS_NO
+		FROM IMG I INNER JOIN TATTOOSHARE T USING(IM_NO)
+		WHERE T.ME_NO = #{me_no}
+		ORDER BY IM_SERVERNAME DESC
+	</select>
+	<delete id="deleteImage" parameterType="imageDto">
+		DELETE FROM IMG
+		WHERE 
+		<if test="im_no_list != null">
+		IM_NO IN
+			<foreach collection="im_no_list" item="item" index="index" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+		
+		</if>
+	</delete>
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

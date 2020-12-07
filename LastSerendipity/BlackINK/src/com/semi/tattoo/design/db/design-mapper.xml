@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="design" >
+
+	<resultMap type="DesignDto" id="DesignDtoMap">
+		<result property="ca_no" 			column="CA_NO" />
+		<result property="me_no" 			column="ME_NO" />
+		<result property="ca_filename" 		column="CA_FILENAME" />
+		<result property="ca_servername" 	column="CA_SERVERNAME" />
+		<result property="ca_filepath" 		column="CA_FILEPATH" />
+		<result property="ca_regdate" 		column="CA_REGDATE" />
+	</resultMap>
+	
+	<insert id="designInsert" parameterType="DesignDto">
+		INSERT INTO CANVAS
+		VALUES (
+			CA_NO_SEQ.NEXTVAL, 
+			#{me_no},
+			#{ca_filename}, #{ca_servername}, #{ca_filepath}, SYSDATE
+		)
+	</insert>
+	
+	<select id="designSelect" parameterType="int" resultMap="DesignDtoMap">
+		SELECT CA_NO, ME_NO, CA_FILENAME, CA_SERVERNAME, CA_FILEPATH, CA_REGDATE
+		FROM CANVAS
+		WHERE ME_NO = #{me_no}
+	</select>
+	
+	<select id="designDetail" parameterType="int" resultMap="DesignDtoMap">
+		SELECT CA_NO, ME_NO, CA_FILENAME, CA_SERVERNAME, CA_FILEPATH, CA_REGDATE
+		FROM CANVAS
+		WHERE CA_NO = #{ca_no}
+	</select>
+	
+	<delete id="designDelete" parameterType="int">
+		DELETE FROM CANVAS
+		WEHER CA_NO = #{ca_no}
+	</delete>
+
+</mapper>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.semi.tattoo.qna">
+
+	<resultMap type="QnaDto" id="QnaDtoMap">
+		<result property="no" column="QA_NO" />
+		<result property="groupno" column="QA_GROUPNO" />
+		<result property="groupseq" column="QA_GROUPSEQ" />
+		<result property="titletab" column="QA_TITLETAB" />
+		<result property="title" column="QA_TITLE" />
+		<result property="writer" column="QA_WRITER" />
+		<result property="content" column="QA_CONTENT" />
+		<result property="img" column="QA_IMG" />
+		<result property="readcount" column="QA_READCOUNT" />
+		<result property="regdate" column="QA_REGDATE" />
+		<result property="delflag" column="QA_DELFLAG" />
+	</resultMap>
+	
+	<select id="selectPage" resultMap="QnaDtoMap">
+		  
+		select X.QA_NO, X.QA_GROUPNO, X.QA_GROUPSEQ, X.QA_TITLETAB, X.QA_TITLE, X.QA_WRITER, X.QA_CONTENT, X.QA_IMG, X.QA_READCOUNT, X.QA_REGDATE, X.QA_DELFLAG
+		from ( 
+  				SELECT ROWNUM as rnum, A.QA_NO, A.QA_GROUPNO, A.QA_GROUPSEQ, A.QA_TITLETAB, A.QA_TITLE, A.QA_WRITER, A.QA_CONTENT, A.QA_IMG, A.QA_READCOUNT, A.QA_REGDATE, A.QA_DELFLAG       					
+  				from (
+        				SELECT QA_NO, QA_GROUPNO, QA_GROUPSEQ, QA_TITLETAB, QA_TITLE, QA_WRITER, QA_CONTENT, QA_IMG, QA_READCOUNT, QA_REGDATE, QA_DELFLAG
+       					FROM QNA
+        				ORDER BY QA_GROUPNO DESC, QA_GROUPSEQ) A
+     			where ROWNUM &lt;= #{endCount} ) X
+		where X.rnum >= #{startCount}
+		
+	</select>
+	<select id="selectOne" resultMap="QnaDtoMap">
+		SELECT QA_NO, QA_GROUPNO, QA_GROUPSEQ, QA_TITLETAB, QA_TITLE, QA_WRITER, QA_CONTENT, QA_IMG, QA_READCOUNT, QA_REGDATE, QA_DELFLAG
+		FROM QNA
+		WHERE QA_NO = #{no}
+		ORDER BY QA_NO, QA_GROUPSEQ
+	</select>
+	<select id="getCount" resultType="int">
+		SELECT COUNT(*)
+		FROM QNA
+	</select>
+	<insert id="insert" parameterType="QnaDto">
+		INSERT INTO QNA
+		VALUES (QA_NO_SEQ.NEXTVAL, GR_NO_SEQ.NEXTVAL , 1 , 0 , #{title} , '임시글쓴이' , #{content}, #{img}, 0 , SYSDATE , 'N')
+	</insert>
+	
+	<insert id="insertAnswer" parameterType="QnaDto">
+		INSERT INTO QNA
+		VALUES (QA_NO_SEQ.NEXTVAL,
+				(SELECT QA_GROUPNO FROM QNA WHERE QA_NO = #{no}),
+				(SELECT QA_GROUPSEQ + 1 FROM QNA WHERE QA_NO = #{no}),
+				(SELECT QA_TITLETAB + 1 FROM QNA WHERE QA_NO =#{no}),
+				#{title},#{writer},#{content}, 0, 0,SYSDATE,'N')	
+	</insert>
+	
+	<update id="update" parameterType="QnaDto">
+		UPDATE QNA
+		SET QA_TITLE = #{title}, QA_CONTENT = #{content}
+		WHERE QA_NO = #{no}
+	</update>
+	<update id="viewCount">
+		UPDATE QNA
+		SET QA_READCOUNT = QA_READCOUNT + 1
+		WHERE QA_NO = #{no}
+	</update>
+	<update id="updateAnswer" parameterType="int">
+		UPDATE QNA
+		SET QA_GROUPSEQ = QA_GROUPSEQ + 1
+		WHERE QA_GROUPNO = (SELECT QA_GROUPNO FROM QNA WHERE QA_NO = #{no})
+		AND QA_GROUPSEQ > (SELECT QA_GROUPSEQ FROM QNA WHERE QA_NO = #{no})
+	</update>
+	
+	<delete id="delete">
+		DELETE FROM QNA
+		WHERE QA_NO = #{no}
+	</delete>
+
+</mapper>		

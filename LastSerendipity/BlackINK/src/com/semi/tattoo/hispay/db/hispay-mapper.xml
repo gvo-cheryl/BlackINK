@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="hispay" >
+
+	<resultMap type="HispayDto" id="HispayDtoMap">
+		<result property="ti_no" 		column="TI_NO" />
+		<result property="me_no" 		column="ME_NO" />
+		<result property="hi_no" 		column="HI_NO" />
+		<result property="hi_method" 	column="HI_METHOD" />
+		<result property="ti_pay" 		column="TI_PAY" />
+		<result property="hi_pay" 		column="HI_PAY" />
+		<result property="ti_title" 	column="TI_TITLE" />
+		<result property="hi_email" 	column="HI_EMAIL" />
+		<result property="hi_bname" 	column="HI_BNAME" />
+		<result property="hi_bnum"	 	column="HI_BNUM" />
+		<result property="hi_bdate" 	column="HI_BDATE" />
+		<result property="hi_date" 		column="HI_DATE" />
+		<result property="hi_state"		column="HI_STATE" />
+	</resultMap>
+
+	<select id="selectOne" parameterType="HispayDto" resultMap="HispayDtoMap">
+		SELECT TI_NO, ME_NO, HI_NO, HI_METHOD, TI_PAY, HI_PAY, TI_TITLE, HI_EMAIL, HI_BNAME, HI_BNUM, HI_BDATE, HI_DATE, HI_STATE
+		FROM HISPAY
+		WHERE TI_NO = #{ti_no} AND HI_NO = #{hi_no}
+	</select>
+	
+	<select id="select" parameterType="int" resultMap="HispayDtoMap">
+		SELECT TI_NO, ME_NO, HI_NO, HI_METHOD, TI_PAY, HI_PAY, TI_TITLE, HI_EMAIL, HI_BNAME, HI_BNUM, HI_BDATE, HI_DATE, HI_STATE
+		FROM HISPAY
+		WHERE ME_NO = #{me_no}
+	</select>
+
+	<insert id="insert" parameterType="HispayDto">
+		INSERT INTO HISPAY
+		VALUES(
+			(SELECT TI_NO FROM TATTOOINFO WHERE TI_NO = #{ti_no}),
+			(SELECT ME_NO FROM TATTOOINFO WHERE TI_NO = #{ti_no}),
+			#{hi_no}, #{hi_method}, (SELECT TI_PAY FROM TATTOOINFO WHERE TI_NO = #{ti_no}), #{hi_pay}, 
+			(SELECT TI_TITLE FROM TATTOOINFO WHERE TI_NO = #{ti_no}),
+			#{hi_email}, #{hi_bname, jdbcType=VARCHAR}, #{hi_bnum, jdbcType=VARCHAR}, #{hi_bdate, jdbcType=VARCHAR}, SYSDATE, 'Y'
+		)
+	</insert>
+	
+	<insert id="insertAPI" parameterType="HispayDto">
+		INSERT INTO HISPAY
+		VALUES(
+			(SELECT TI_NO FROM TATTOOINFO WHERE TI_NO = #{ti_no}),
+			(SELECT ME_NO FROM TATTOOINFO WHERE TI_NO = #{ti_no}),
+			#{hi_no}, #{hi_method}, (SELECT TI_PAY FROM TATTOOINFO WHERE TI_NO = #{ti_no}), #{hi_pay}, 
+			(SELECT TI_TITLE FROM TATTOOINFO WHERE TI_NO = #{ti_no}),
+			#{hi_email}, #{hi_bname, jdbcType=VARCHAR}, #{hi_bnum, jdbcType=VARCHAR}, #{hi_bdate, jdbcType=VARCHAR}, SYSDATE, 'N'
+		)
+	</insert>
+	
+	<update id="updateInfo" parameterType="HispayDto">
+		UPDATE HISPAY
+		SET HI_NO = #{hi_no}, HI_INFO = 'Y'
+		WHERE TI_NO = #{ti_no} AND ME_NO = #{me_no}
+	</update>
+	
+	<update id="updateBankInfo" parameterType="HispayDto">
+		UPDATE HISPAY
+		SET HI_BNAME = #{hi_bname}, HI_BNUM = #{hi_bnum}, HI_BDATE = (SELECT TO_DATE(#{hi_bdate},'yyyy-mm-dd hh24:mi:ss') FROM DUAL)
+		WHERE TI_NO = #{ti_no} AND HI_NO = #{hi_no}
+	</update>
+	
+	<select id="state" parameterType="int" resultType="string">
+	 	SELECT HI_STATE
+	 	FROM HISPAY
+	 	WHERE Ti_NO = #{ti_no}
+	</select>
+
+</mapper>

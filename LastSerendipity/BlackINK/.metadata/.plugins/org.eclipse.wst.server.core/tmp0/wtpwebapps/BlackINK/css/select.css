@@ -1,0 +1,49 @@
+@charset "UTF-8";
+
+*{
+	margin: 0px;
+	padding: 0px;
+
+	
+}
+
+#mainWrap{
+	width: 94.5%;
+	height: 1000px;
+	border: 0.5px solid grey;
+	position: relative;
+	top: 30px;
+	left: 30px;
+}
+
+#mainWrap hr {
+	position: absolute;
+	top: 65px;
+	left: 18px;
+}
+
+#topWrap{
+	width: 100%;
+	height: 100px;
+	padding: 20px;
+}
+#topWrap p:nth-child(1) {
+	font-size: 18pt;
+}
+#topWrap p:nth-child(2) {
+	font-size: 12pt;
+	margin-top: 3px;
+	
+}
+#topWrap p:nth-child(3){
+	font-size: 10pt;
+	margin-top: 3px;
+}
+#bottomWrap {
+	width: 94.5%;
+	height: 600px;
+	padding: 20px;
+}
+#buttonWrap {
+	border: 1px solid red;
+}

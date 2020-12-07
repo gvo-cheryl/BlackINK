@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.semi.tattoo.login.allList">
+
+  <resultMap type="LoginDto" id="LoginDtoMap">
+    <result property="me_no" column="ME_NO"/>
+    <result property="me_email" column="ME_EMAIL"/>
+    <result property="me_pw" column="ME_PW"/>
+    <result property="me_name" column="ME_NAME"/>
+    <result property="me_nic" column="ME_NIC"/> 
+    <result property="me_birth" column="ME_BIRTH"/>
+    <result property="me_phone" column="ME_PHONE"/>
+    <result property="me_enabled" column="ME_ENABLED"/>
+    <result property="me_role" column="ME_ROLE"/>
+    <result property="me_sns_type" column="ME_SNS_TYPE"/>
+    <result property="me_sns_token" column="ME_SNS_TOKEN"/>
+    
+  </resultMap>
+  
+  <select id="userList" resultMap="LoginDtoMap">
+    SELECT ME_NO
+		    , ME_NAME
+		    , ME_EMAIL
+		    , ME_PW
+		    , ME_NIC
+		    , ME_PHONE
+		    , ME_ENABLED
+		    , ME_ROLE
+		    , ME_SNS_TYPE
+	    FROM MEMBER
+	    ORDER BY ME_NO DESC
+  </select>
+  <select id="selectOne" resultType="LoginDto" parameterType="integer">
+	SELECT ME_NO, ME_EMAIL, ME_ROLE
+	FROM MEMBER 
+	WHERE ME_NO = #{me_no}
+  </select>
+  <update id="updateRole" parameterType="LoginDto">
+  	UPDATE MEMBER SET ME_ROLE = #{me_role} WHERE ME_NO = #{me_no}
+  </update>
+  <select id="selectDetailSearch" resultMap="LoginDtoMap"
+		parameterType="LoginDto">
+		SELECT ME_NO
+		    , ME_NAME
+		    , ME_EMAIL
+		    , ME_PW
+		    , ME_NIC
+		    , ME_PHONE
+		    , ME_ENABLED
+		    , ME_ROLE
+		    , ME_SNS_TYPE
+	    FROM MEMBER
+	    WHERE
+	    <if test="me_enabled_list != null">
+	    ME_ENABLED IN
+		    <foreach collection="me_enabled_list" item="item" index="index" open="(" separator="," close=")">
+		    	#{item}
+		    </foreach>
+	    </if>
+	    AND
+	    <if test="me_role_list != null">
+	    ME_ROLE IN
+	    	<foreach collection="me_role_list" item="item" index="index" open="(" separator="," close=")">
+	    	#{item}
+	    	</foreach>
+	    </if>
+	    ORDER BY ME_NO DESC
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

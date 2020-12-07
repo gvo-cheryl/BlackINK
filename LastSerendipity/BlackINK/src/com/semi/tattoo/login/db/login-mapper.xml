@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.semi.tattoo">
+
+  <resultMap type="LoginDto" id="LoginDtoMap">
+    <result property="me_no" column="ME_NO"/>
+    <result property="me_email" column="ME_EMAIL"/>
+    <result property="me_pw" column="ME_PW"/>
+    <result property="me_name" column="ME_NAME"/>
+    <result property="me_nic" column="ME_NIC"/> 
+    <result property="me_birth" column="ME_BIRTH"/>
+    <result property="me_phone" column="ME_PHONE"/>
+    <result property="me_enabled" column="ME_ENABLED"/>
+    <result property="me_role" column="ME_ROLE"/>
+    <result property="me_sns_type" column="ME_SNS_TYPE"/>
+    <result property="me_sns_token" column="ME_SNS_TOKEN"/>
+    
+  </resultMap>
+  
+  <select id="loginCheck" parameterType="LoginDto" resultMap="LoginDtoMap">
+    SELECT ME_NO
+	    , ME_NAME
+	    , ME_EMAIL
+	    , ME_PW
+	    , ME_NIC
+	    , TO_CHAR(ME_BIRTH, 'YYYY-MM-DD') AS ME_BIRTH
+	    , ME_PHONE
+	    , ME_ENABLED
+	    , ME_ROLE
+	    , ME_SNS_TYPE
+	    , ME_SNS_TOKEN
+    FROM MEMBER
+    WHERE ME_ENABLED='Y' 
+    	AND ME_EMAIL=#{me_email}
+    	AND ME_PW=#{me_pw}
+  </select>
+  
+  <select id="emailCheck" resultMap="LoginDtoMap" >
+  	SELECT ME_NO
+		,ME_EMAIL
+		,ME_PW
+		,ME_NAME
+		,ME_NIC
+		,ME_BIRTH
+		,ME_PHONE
+		,ME_ROLE
+		,ME_SNS_TYPE
+		,ME_SNS_TOKEN
+  	FROM MEMBER 
+  	WHERE ME_EMAIL=#{me_email}
+  </select>
+  
+  <select id="naverJoinCheck" resultMap="LoginDtoMap" >
+  	SELECT ME_NO
+		,ME_EMAIL
+		,ME_PW
+		,ME_NAME
+		,ME_NIC
+		,ME_BIRTH
+		,ME_PHONE
+		,ME_ROLE
+		,ME_ENABLED
+		,ME_SNS_TYPE
+		,ME_SNS_TOKEN
+  	FROM MEMBER 
+  	WHERE ME_SNS_TOKEN=#{me_sns_token}
+  </select>
+  
+	<insert id="insert" parameterType="LoginDto">
+	INSERT INTO MEMBER
+	(
+		ME_NO
+		,ME_EMAIL
+		,ME_PW
+		,ME_NAME
+		,ME_NIC
+		,ME_BIRTH
+		,ME_PHONE
+		,ME_ROLE
+		,ME_SNS_TYPE
+		,ME_SNS_TOKEN
+	)
+	VALUES
+	(
+		ME_NO_SEQ.NEXTVAL
+		,#{me_email}
+		,#{me_pw,jdbcType=VARCHAR}
+		,#{me_name,jdbcType=VARCHAR}
+		,#{me_nic,jdbcType=VARCHAR}
+		,#{me_birth,jdbcType=VARCHAR}
+		,#{me_phone,jdbcType=VARCHAR}
+		,#{me_role,jdbcType=VARCHAR}
+		,#{me_sns_type,jdbcType=VARCHAR}
+		,#{me_sns_token,jdbcType=VARCHAR}
+	)
+	</insert>
+	
+	<insert id="naverInsert" parameterType="LoginDto">
+	INSERT INTO MEMBER
+	(
+		ME_NO
+		,ME_EMAIL
+		,ME_NAME
+		,ME_ROLE
+		,ME_ENABLED
+		,ME_SNS_TYPE
+		,ME_SNS_TOKEN
+	)
+	VALUES
+	(
+		ME_NO_SEQ.NEXTVAL
+		,#{me_email}
+		,#{me_name}
+		,#{me_role}
+		,#{me_enabled}
+		,#{me_sns_type}
+		,#{me_sns_token}
+	)
+	</insert>
+	
+	<select id="naverCheck" resultMap="LoginDtoMap" parameterType="LoginDto">
+		SELECT ME_NO
+	    , ME_NAME
+	    , ME_EMAIL
+	    , ME_PW
+	    , ME_NIC
+	    , TO_CHAR(ME_BIRTH, 'YYYY-MM-DD') AS ME_BIRTH
+	    , ME_PHONE
+	    , ME_ENABLED
+	    , ME_ROLE
+	    , ME_SNS_TYPE
+	    , ME_SNS_TOKEN
+    FROM MEMBER
+    	WHERE ME_EMAIL=#{me_email}
+    	AND ME_SNS_TOKEN=#{me_sns_token}
+	</select>
+	
+	<select id="myInfo" resultMap="LoginDtoMap">
+		SELECT ME_NO
+	    , ME_NAME
+	    , ME_EMAIL
+	    , ME_PW
+	    , ME_NIC
+	    , TO_CHAR(ME_BIRTH, 'YYYY-MM-DD') AS ME_BIRTH
+	    , ME_PHONE
+	    , ME_BIRTH
+	    , ME_ENABLED
+	    , ME_ROLE
+	    , ME_SNS_TYPE
+	    , ME_SNS_TOKEN
+    FROM MEMBER
+    	WHERE ME_NO=#{me_no}
+	</select>
+	
+	<select id="kakaoCheck" resultMap="LoginDtoMap" parameterType="LoginDto">
+		SELECT ME_NO
+	    , ME_NAME
+	    , ME_EMAIL
+	    , ME_PW
+	    , ME_NIC
+	    , TO_CHAR(ME_BIRTH, 'YYYY-MM-DD') AS ME_BIRTH
+	    , ME_PHONE
+	    , ME_ENABLED
+	    , ME_ROLE
+	    , ME_SNS_TYPE
+	    , ME_SNS_TOKEN
+    FROM MEMBER
+    	WHERE ME_EMAIL=#{me_email}
+    	AND ME_SNS_TYPE='KAKAO'
+	</select>
+	
+	<update id="update" parameterType="LoginDto">
+		UPDATE MEMBER SET ME_EMAIL=#{me_email}, ME_PW=#{me_pw}, ME_PHONE=#{me_phone}, ME_BIRTH=#{me_birth}
+		WHERE  ME_NO = #{me_no}
+	</update>
+	
+	<update id="kakaoupdate" parameterType="LoginDto">
+		UPDATE MEMBER SET  ME_PHONE=#{me_phone}, ME_BIRTH = #{me_birth} 
+		WHERE  ME_NO=#{me_no}
+	</update>
+	
+	<update id="kakaoupdatepage" parameterType="LoginDto">
+		UPDATE MEMBER SET  ME_PHONE=#{me_phone}
+		WHERE  ME_NO=#{me_no}
+	</update>
+	
+	<delete id="enabledUpdate" parameterType="LoginDto">
+		UPDATE MEMBER SET ME_ENABLED = #{me_enabled} WHERE ME_NO=#{me_no}
+	</delete>
+	
+	<select id="searchEmail" resultType="String">
+	SELECT ME_EMAIL
+	FROM MEMBER
+	WHERE TO_CHAR(ME_BIRTH, 'YYYY-MM-DD') = #{me_birth, jdbcType=VARCHAR}
+		AND ME_PHONE = #{me_phone, jdbcType=VARCHAR}
+	</select>
+
+	<select id="searchPw" resultType="String">
+	SELECT ME_PW
+	FROM MEMBER
+	WHERE ME_EMAIL = #{me_email} 
+		AND TO_CHAR(ME_BIRTH, 'YYYY-MM-DD') = #{me_birth, jdbcType=VARCHAR}
+		AND ME_PHONE = #{me_phone, jdbcType=VARCHAR}
+	</select>
+	
+	<select id="mypage" resultMap="LoginDtoMap">
+		SELECT ME_NO
+	    , ME_NAME
+	    , ME_EMAIL
+	    , ME_PW
+	    , ME_NIC
+	    , TO_CHAR(ME_BIRTH, 'YYYY-MM-DD') AS ME_BIRTH
+	    , ME_PHONE
+	    , ME_ENABLED
+	    , ME_ROLE
+	    , ME_SNS_TYPE
+	    , ME_SNS_TOKEN
+    FROM MEMBER
+    	WHERE ME_NO=#{me_no}
+	</select>
+	<select id="searchMeno" parameterType="String" resultType="int">
+		SELECT ME_NO FROM MEMBER WHERE ME_EMAIL = #{me_email}
+	</select>
+	<select id="searchTiList" resultMap="LoginDtoMap">
+		SELECT ME_NO, ME_NIC FROM MEMBER WHERE ME_ROLE = 'T'
+	</select>
+  
+</mapper>
+

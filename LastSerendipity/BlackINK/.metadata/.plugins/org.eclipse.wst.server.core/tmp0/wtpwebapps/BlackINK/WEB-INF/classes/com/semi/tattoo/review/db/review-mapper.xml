@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.semi.tattoo.review">
+
+	<resultMap type="ReviewDto" id="ReviewDtoMap">
+		<result property="no" column="RE_NO" />
+		<result property="writer" column="RE_WRITER" />
+		<result property="title" column="RE_TITLE" />
+		<result property="content" column="RE_CONTENT" />
+		<result property="regdate" column="RE_REGDATE" />
+		<result property="readcount" column="RE_READCOUNT" />
+		<result property="step" column="RE_STEP" />
+		<result property="filename" column="IM_FILENAME" />
+		<result property="delflag" column="RE_DELFLAG" />
+		
+	</resultMap>
+	
+	<select id="selectList" resultMap="ReviewDtoMap">
+		SELECT RE_NO, RE_WRITER, RE_TITLE, RE_CONTENT, RE_REGDATE, RE_READCOUNT, RE_STEP, IM_FILENAME, RE_DELFLAG
+		FROM REVIEW
+		ORDER BY RE_NO DESC
+	</select>
+	<select id="selectPage" resultMap="ReviewDtoMap">
+		select X.RE_NO, X.RE_WRITER, X.RE_TITLE, X.RE_REGDATE, X.RE_READCOUNT, X.IM_FILENAME, X.RE_DELFLAG
+		from ( 
+  				SELECT ROWNUM as rnum, A.RE_NO, A.RE_WRITER, A.RE_TITLE, A.RE_REGDATE, A.RE_READCOUNT, A.IM_FILENAME, A.RE_DELFLAG
+  				from (
+        				SELECT RE_NO, RE_WRITER, RE_TITLE, RE_REGDATE, RE_READCOUNT, IM_FILENAME, RE_DELFLAG
+       					FROM REVIEW
+        				ORDER BY RE_NO DESC) A
+     			where ROWNUM &lt;= #{endCount} ) X
+		where X.rnum >= #{startCount}
+		
+	</select>
+	<select id="selectOne" resultMap="ReviewDtoMap">
+		SELECT RE_NO, RE_WRITER, RE_TITLE, RE_CONTENT, RE_REGDATE, RE_READCOUNT, RE_STEP, IM_FILENAME, RE_DELFLAG 
+		FROM REVIEW
+		WHERE RE_NO = #{no}
+	</select>
+	<insert id="insert" parameterType="ReviewDto">
+		INSERT INTO REVIEW
+		VALUES (RE_NO_SEQ.NEXTVAL, 1, #{writer} ,#{title}, #{content}, SYSDATE, 0, 1, 1 , #{img}, 0, 'N')
+	</insert>
+	<update id="update" parameterType="ReviewDto">
+		UPDATE REVIEW
+		SET RE_TITLE = #{title}, RE_CONTENT = #{content}
+		WHERE RE_NO = #{no}
+	</update>
+	<update id="viewCount">
+		UPDATE REVIEW
+		SET RE_READCOUNT = RE_READCOUNT + 1
+		WHERE RE_NO = #{no}
+	</update>
+	<delete id="delete">
+		DELETE FROM REVIEW
+		WHERE RE_NO = #{no}
+	</delete>
+	<select id="getCount" resultType="int">
+		SELECT COUNT(*)
+		FROM REVIEW
+	</select>
+	
+</mapper>	

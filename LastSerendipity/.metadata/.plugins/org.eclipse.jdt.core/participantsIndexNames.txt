@@ -1,0 +1,7 @@
+INDEX VERSION 1.131
+/Users/cheryl/workspace/LastSerendipity/.metadata/.plugins/org.eclipse.jst.jsp.core/jspsearch/3244651315.index
+/BlackINK/src
+/Users/cheryl/workspace/LastSerendipity/.metadata/.plugins/org.eclipse.jst.jsp.core/jspsearch/1557099283.index
+/BlackINK/src
+/Users/cheryl/workspace/LastSerendipity/.metadata/.plugins/org.eclipse.jst.jsp.core/jspsearch/608717982.index
+/BlackINK/src

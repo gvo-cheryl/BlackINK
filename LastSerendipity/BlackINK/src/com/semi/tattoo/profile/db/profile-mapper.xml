@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.semi.tattoo.profile">
+
+	<resultMap type="profileDto" id="profileDtoMap">
+		<result property="me_no" column="ME_NO" />
+		<result property="pr_shopname" column="PR_SHOPNAME" />
+		<result property="pr_open" column="PR_OPEN" />
+		<result property="pr_close" column="PR_CLOSE" />
+		<result property="pr_post" column="PR_POST" />
+		<result property="pr_adr_main" column="PR_ADR_MAIN" />
+		<result property="pr_adr_d1" column="PR_ADR_D1" />
+		<result property="pr_adr_d2" column="PR_ADR_D2" />
+		<result property="pr_content" column="PR_CONTENT" />
+		<result property="me_nic" column="ME_NIC" />
+	</resultMap>
+	
+	<select id="selectOne" parameterType="int" resultType="profileDto">
+		SELECT ME_NO, ME_NIC, PR_SHOPNAME, PR_OPEN, PR_CLOSE, PR_POST,
+			   PR_ADR_MAIN, PR_ADR_D1, PR_ADR_D2, PR_CONTENT
+		FROM PROFILE JOIN MEMBER USING(ME_NO)
+		WHERE ME_NO = #{me_no}
+	</select>
+	<insert id="insertProfile" parameterType="int">
+		INSERT INTO PROFILE
+		VALUES
+			(#{me_no}, '작성해주세요', '00:00',
+			'00:00', ' ', ' ',
+			' ', ' ', '작성해주세요')
+	</insert>
+	<update id="profileUpdate" parameterType="profileDto">
+	UPDATE PROFILE SET PR_SHOPNAME = #{pr_shopname},
+					   PR_OPEN = #{pr_open},
+					   PR_CLOSE = #{pr_close},
+					   PR_POST = #{pr_post},
+					   PR_ADR_MAIN = #{pr_adr_main},
+					   PR_ADR_D1 = #{pr_adr_d1},
+					   PR_ADR_D2 = #{pr_adr_d2},
+					   PR_CONTENT = #{pr_content}
+	WHERE ME_NO = #{me_no}
+	</update>
+	<delete id="deleteProfile" parameterType="int">
+		DELETE FROM PROFILE WHERE ME_NO = #{me_no}
+	</delete>
+
+
+</mapper>

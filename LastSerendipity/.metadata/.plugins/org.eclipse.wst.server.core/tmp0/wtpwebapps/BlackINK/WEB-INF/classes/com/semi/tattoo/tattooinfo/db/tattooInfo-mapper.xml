@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="timapper">
+   
+   <resultMap type="tattooInfoDto" id="tattooInfoDtoResultMap">
+      <result property="ti_no"         column="TI_NO"/>
+      <result property="me_no"         column="ME_NO"/>
+      <result property="ti_title"         column="TI_TITLE"/>
+      <result property="ti_content"      column="TI_CONTENT"/>
+      <result property="ti_tno"         column="TI_TNO"/>
+      <result property="ti_pay"         column="TI_PAY"/>
+      <result property="ti_date"         column="TI_DATE"/>
+      <result property="ti_time"         column="TI_TIME"/>
+      <result property="ti_state"         column="TI_STATE"/>
+      <result property="ti_sysdate"      column="TI_SYSDATE"/>
+   </resultMap>
+   
+   <select id="calendarViewList" parameterType="tattooInfoDto" resultType="hashMap">
+      SELECT TI_NO, T.ME_NO, M.ME_NAME, TI_TITLE, TI_CONTENT, TI_TNO, TI_PAY, TI_DATE, TI_TIME, TI_STATE, TI_REGDATE
+      FROM (SELECT (ROW_NUMBER() OVER(PARTITION BY TI_DATE ORDER BY TI_TIME)) RN ,
+      TI_NO, ME_NO, TI_TITLE, TI_CONTENT, TI_TNO, TI_PAY, TI_DATE, TI_TIME, TI_STATE, TI_REGDATE
+      FROM TATTOOINFO WHERE TI_TNO = #{ti_tno} AND SUBSTR(TI_DATE,0,6) = #{ti_date}) T
+      INNER JOIN MEMBER M ON T.ME_NO = M.ME_NO
+      WHERE RN BETWEEN 1 AND 3
+   </select>
+   
+   <select id="listCalBoard" parameterType="hashMap" resultType="hashMap">
+      SELECT TI_NO, T.ME_NO, M.ME_NAME, TI_TITLE, TI_CONTENT, TI_TNO, TI_PAY, TI_DATE, TI_TIME, TI_STATE, TI_REGDATE 
+      FROM TATTOOINFO T INNER JOIN MEMBER M ON T.ME_NO = M.ME_NO
+      WHERE TI_DATE = #{ti_date} AND TI_TNO = #{me_no} ORDER BY TI_TIME
+   </select>
+   
+   <select id="selectDetailList" parameterType="hashMap" resultType="hashMap">
+      SELECT TI_NO, T.ME_NO, M.ME_NAME, TI_TITLE, TI_CONTENT, TI_TNO, TI_PAY, TI_DATE, TI_TIME, TI_STATE, TI_REGDATE 
+      FROM TATTOOINFO T INNER JOIN MEMBER M ON T.ME_NO = M.ME_NO
+      WHERE TI_TNO = #{ti_tno}
+      AND TO_NUMBER(TI_DATE) BETWEEN #{ti_date2} AND #{ti_date}
+      ORDER BY TI_DATE, TI_TIME
+   </select>
+   
+   <select id="selectOne" parameterType="string" resultType="hashMap">
+      SELECT TI_NO, T.ME_NO, M.ME_NAME, TI_TITLE, TI_CONTENT, TI_TNO, TI_PAY, TI_DATE, TI_TIME, TI_STATE, TI_REGDATE 
+      FROM TATTOOINFO T INNER JOIN MEMBER M ON T.ME_NO = M.ME_NO WHERE TI_NO = #{ti_no}
+   </select>
+   
+   <update id="updateTattooInfo" parameterType="tattooInfoDto">
+      UPDATE TATTOOINFO SET TI_PAY = #{ti_pay}, TI_DATE = #{ti_date}, TI_TIME = #{ti_time}, TI_STATE = #{ti_state}
+      WHERE TI_NO = #{ti_no}
+   </update>
+   <insert id="insertTattooInfo" parameterType="tattooInfoDto">
+      INSERT INTO TATTOOINFO VALUES(TI_NO_SEQ.NEXTVAL,#{me_no},#{ti_title},#{ti_content},
+      #{ti_tno},0,#{ti_date},#{ti_time},'N',SYSDATE)
+   </insert>
+   
+   <select id="selectMyList" parameterType="int" resultType="hashMap">
+      SELECT TI_NO, T.ME_NO, M.ME_NIC, TI_TITLE, TI_CONTENT, TI_TNO, TI_PAY, TI_DATE, TI_TIME, TI_STATE, TI_REGDATE 
+      FROM TATTOOINFO T INNER JOIN MEMBER M ON T.TI_TNO = M.ME_NO WHERE T.ME_NO = #{me_no}
+   </select>
+   
+   <select id="selectTiList" parameterType="int" resultMap="tattooInfoDtoResultMap">
+      SELECT * FROM TATTOOINFO WHERE TI_TNO = #{me_no}
+   </select>
+   
+   <select id="selectDetailMyList" parameterType="hashMap" resultType="hashMap">
+      SELECT TI_NO, T.ME_NO, M.ME_NIC, TI_TITLE, TI_CONTENT, TI_TNO, TI_PAY, TI_DATE, TI_TIME, TI_STATE, TI_REGDATE 
+      FROM TATTOOINFO T INNER JOIN MEMBER M ON T.TI_TNO = M.ME_NO
+      WHERE T.ME_NO = #{me_no}
+      AND TO_NUMBER(TI_DATE) BETWEEN #{ti_date2} AND #{ti_date}
+      ORDER BY TI_DATE, TI_TIME
+   </select>
+   
+   <select id="selectOnes" parameterType="string" resultMap="tattooInfoDtoResultMap">
+      SELECT * FROM TATTOOINFO WHERE TI_NO = #{ti_no}
+   </select>
+</mapper>

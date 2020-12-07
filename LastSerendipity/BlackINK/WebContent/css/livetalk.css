@@ -1,0 +1,18 @@
+@charset "UTF-8";
+
+.livetalk{
+	margin:0;
+	padding:0;
+	width:auto;
+}
+
+.livetalk_body{
+	overflow-y:auto;
+	height:600px;
+}
+
+#li_content{
+	padding:1px;
+	width:auto;
+	resize:none;
+}

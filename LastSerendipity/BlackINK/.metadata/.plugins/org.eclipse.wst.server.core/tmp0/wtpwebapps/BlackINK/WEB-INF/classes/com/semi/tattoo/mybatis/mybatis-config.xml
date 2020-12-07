@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<properties resource="com/semi/tattoo/mybatis/db.properties"></properties>
+	
+	<typeAliases>
+		<typeAlias type="com.semi.tattoo.image.dto.imageDto" alias="imageDto"/>
+		<typeAlias type="com.semi.tattoo.tag.dto.tagDto" alias="tagDto"/>
+		<typeAlias type="com.semi.tattoo.tattooshare.dto.tattooshareDto" alias="tattooshareDto"/>
+		<typeAlias type="com.semi.tattoo.profile.dto.profileDto" alias="profileDto"/>
+		<typeAlias type="com.semi.tattoo.location.dto.locationDto" alias="locationDto"/>
+		<typeAlias type="com.semi.tattoo.login.dto.LoginDto" alias="LoginDto"/>
+		<typeAlias type="com.semi.tattoo.notice.dto.NoticeDto" alias="NoticeDto"/>
+		<typeAlias type="com.semi.tattoo.review.dto.ReviewDto" alias="ReviewDto"/>
+		<typeAlias type="com.semi.tattoo.qna.dto.QnaDto" alias="QnaDto"/>
+	</typeAliases>
+
+  <environments default="development">
+    <environment id="development">
+      <transactionManager type="JDBC"/>
+      <dataSource type="POOLED">
+        <property name="driver" value="${driver}"/>
+        <property name="url" value="${url}"/>
+        <property name="username" value="${username}"/>
+        <property name="password" value="${password}"/>
+      </dataSource>
+    </environment>
+  </environments>
+  <mappers>
+ 	<mapper resource="com/semi/tattoo/image/db/image-mapper.xml"/>
+  	<mapper resource="com/semi/tattoo/tag/db/tag-mapper.xml"/>
+  	<mapper resource="com/semi/tattoo/tattooshare/db/tattooshare-mapper.xml"/>
+  	<mapper resource="com/semi/tattoo/login/db/login-mapper.xml"/>
+  	<mapper resource="com/semi/tattoo/profile/db/profile-mapper.xml"/>
+  	<mapper resource="com/semi/tattoo/location/db/location-mapper.xml"/>
+  	<mapper resource="com/semi/tattoo/login/db/loginAdmin-mapper.xml"/>
+  	<mapper resource="com/semi/tattoo/notice/db/notice-mapper.xml"/>
+  	<mapper resource="com/semi/tattoo/review/db/review-mapper.xml"/>
+  	<mapper resource="com/semi/tattoo/qna/db/qna-mapper.xml"/>
+  </mappers>
+</configuration>

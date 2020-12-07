@@ -1,0 +1,7 @@
+INDEX VERSION 1.4+/Users/cheryl/workspace/LastSerendipity/.metadata/.plugins/org.eclipse.wst.jsdt.core/indexes
+2110486184.index
+2639091553.index
+2675960635.index
+3145499888.index
+3988872883.index
+502452463.index

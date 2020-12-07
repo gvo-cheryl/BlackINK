@@ -1,0 +1,5 @@
+127.0.0.1 - - [04/Oct/2020:23:59:28 +0900] "GET / HTTP/1.1" 404 807
+0:0:0:0:0:0:0:1 - - [04/Oct/2020:23:59:30 +0900] "GET /BlackINK/ HTTP/1.1" 200 2532
+0:0:0:0:0:0:0:1 - - [04/Oct/2020:23:59:30 +0900] "GET /BlackINK/css/header.css HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [04/Oct/2020:23:59:31 +0900] "GET /BlackINK/login.do HTTP/1.1" 200 5181
+0:0:0:0:0:0:0:1 - - [04/Oct/2020:23:59:38 +0900] "GET /BlackINK/kakaoOauth.do?code=ao6YWFmzWERHxGhtJaAtz624X_pGsKSXy3CHNZGqYX2qcSLpeu00ddkWYUAcL58zBiSo7wo9dZoAAAF09CAJYw HTTP/1.1" 200 5977

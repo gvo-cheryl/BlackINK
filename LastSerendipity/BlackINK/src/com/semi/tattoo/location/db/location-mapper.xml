@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.semi.tattoo.location">
+
+	<resultMap type="locationDto" id="locationDtoMap">
+		<result property="pr_adr_main" column="PR_ADR_MAIN" />
+		<result property="me_no" column="ME_NO" />
+		<result property="me_nic" column="ME_NIC" />
+		<result property="pr_shopname" column="PR_SHOPNAME" />
+	</resultMap>
+
+	<select id="selectOneAddress" resultMap="locationDtoMap" 
+	parameterType="String">
+		SELECT PR_ADR_MAIN, ME_NO, ME_NIC, PR_SHOPNAME
+		FROM MEMBER JOIN PROFILE USING(ME_NO)
+		WHERE UPPER(ME_NIC) LIKE '%'||#{keyword}||'%'
+		OR UPPER(PR_SHOPNAME) LIKE '%'||#{keyword}||'%'
+	</select>
+
+
+
+</mapper>

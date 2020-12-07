@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="JavaElementSearchActions">
+	</section>
+	<section name="BuildPathsPropertyPage">
+		<item key="pageIndex" value="2"/>
+	</section>
+	<section name="ClasspathContainerSelectionPage">
+		<item key="index" value="7"/>
+	</section>
+	<section name="completion_proposal_size">
+	</section>
+	<section name="quick_assist_proposal_size">
+	</section>
+	<section name="org.eclipse.jdt.internal.ui.wizards.buildpaths.NewVariableEntryDialog">
+		<item key="DIALOG_X_ORIGIN" value="188"/>
+		<item key="DIALOG_Y_ORIGIN" value="37"/>
+		<item key="DIALOG_WIDTH" value="625"/>
+		<item key="DIALOG_HEIGHT" value="345"/>
+		<item key="DIALOG_FONT_NAME" value="1|.AppleSystemUIFont|11.0|0|COCOA|1|.AppleSystemUIFont"/>
+	</section>
+	<section name="OptionalMessageDialog.hide.">
+		<item key="org.eclipse.jdt.ui.typecomment.deprecated" value="true"/>
+	</section>
+	<section name="NewClassWizardPage">
+		<item key="create_constructor" value="false"/>
+		<item key="create_unimplemented" value="true"/>
+	</section>
+</section>

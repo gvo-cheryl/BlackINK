@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.semi.tattoo.notice">
+
+	<resultMap type="NoticeDto" id="NoticeDtoMap">
+		<result property="no" column="NO_NO" />
+		<result property="writer" column="NO_WRITER" />
+		<result property="title" column="NO_TITLE" />
+		<result property="content" column="NO_CONTENT" />
+		<result property="view" column="NO_VIEW" />
+		<result property="regdate" column="NO_REGDATE" />
+	</resultMap>
+	
+	
+	<select id="selectList" resultMap="NoticeDtoMap">
+		SELECT NO_NO, NO_WRITER, NO_TITLE, NO_CONTENT, NO_VIEW, NO_REGDATE
+		FROM NOTICE
+		ORDER BY NO_NO DESC
+	</select>
+	<select id="selectPage" resultMap="NoticeDtoMap">
+		  
+		select X.NO_NO, X.NO_WRITER, X.NO_TITLE, X.NO_CONTENT, X.NO_VIEW, X.NO_REGDATE
+		from ( 
+  				SELECT ROWNUM as rnum, A.NO_NO, A.NO_WRITER, A.NO_TITLE, A.NO_CONTENT, A.NO_VIEW, NO_REGDATE
+  				from (
+        				SELECT NO_NO, NO_WRITER, NO_TITLE, NO_CONTENT, NO_VIEW, NO_REGDATE
+       					FROM NOTICE
+        				ORDER BY NO_NO DESC) A
+     			where ROWNUM &lt;= #{endCount} ) X
+		where X.rnum >= #{startCount}
+		
+	</select>
+	<select id="selectOne" resultMap="NoticeDtoMap">
+		SELECT NO_NO, NO_WRITER, NO_TITLE, NO_CONTENT, NO_VIEW, NO_REGDATE
+		FROM NOTICE
+		WHERE NO_NO = #{no}
+	</select>
+	<insert id="insert" parameterType="NoticeDto">
+		INSERT INTO NOTICE
+		VALUES (NO_NO_SEQ.NEXTVAL, 0, #{writer}, #{title}, #{content}, 0, SYSDATE)
+	</insert>
+	<update id="update" parameterType="NoticeDto">
+		UPDATE NOTICE
+		SET NO_TITLE = #{title}, NO_CONTENT = #{content}
+		WHERE NO_NO = #{no}
+	</update>
+	<update id="viewCount">
+		UPDATE NOTICE
+		SET NO_VIEW = NO_VIEW + 1
+		WHERE NO_NO = #{no}
+	
+	</update>
+	<delete id="delete">
+		DELETE FROM NOTICE
+		WHERE NO_NO = #{no}
+	</delete>
+	<select id="getCount" resultType="int">
+		SELECT COUNT(*)
+		FROM NOTICE
+	</select>
+	
+</mapper>		

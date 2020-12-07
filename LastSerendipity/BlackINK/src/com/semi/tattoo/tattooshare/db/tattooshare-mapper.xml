@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.semi.tattoo.tattooshare">
+
+	<resultMap type="tattooshareDto" id="tattooshareDtoMap">
+		<result property="ts_no" column="TS_NO" />
+		<result property="me_no" column="ME_NO" />
+		<result property="ts_writer" column="TS_WRITER" />
+		<result property="ts_title" column="TS_TITLE" />
+		<result property="ts_content" column="TS_CONTENT" />
+		<result property="ts_regdate" column="TS_REGDATE" />
+		<result property="ts_readcount" column="TS_READCOUNT" />
+		<result property="ts_groupno" column="TS_GROUPNO" />
+		<result property="ts_step" column="TS_STEP" />
+		<result property="im_no" column="IM_NO" />
+		<result property="ts_titletab" column="TS_TITLETAB" />
+		<result property="ts_delflag" column="TS_DELFALG" />
+		<result property="im_servername" column="IM_SERVERNAME" />
+		<result property="im_filepath" column="IM_FILEPATH" />
+	</resultMap>
+	<select id="selectVisionList" resultMap="tattooshareDtoMap"
+		parameterType="map">
+		SELECT TS_WRITER, TS_TITLE, IM_NO, IM_SERVERNAME, IM_FILEPATH
+		FROM TATTOOSHARE
+		JOIN IMG USING(IM_NO)
+		WHERE IM_NO IN (SELECT IM_NO FROM TAG WHERE TA_LABELTAG IN 
+		<foreach collection="list" item="item" open="(" separator="," close=")">
+			#{item.ta_labeltag}
+		</foreach>
+		OR TA_TEXTTAG IN
+		<foreach collection="list" item="item" open="(" separator="," close=")">
+			#{item.ta_texttag}
+		</foreach>
+		)
+		ORDER BY IM_SERVERNAME DESC
+	</select>
+	<select id="selectTextsearchList" resultMap="tattooshareDtoMap"
+		parameterType="map">
+		SELECT TS_WRITER, TS_TITLE, IM_NO, IM_SERVERNAME, IM_FILEPATH
+		FROM
+		TATTOOSHARE
+		JOIN IMG USING(IM_NO)
+		WHERE IM_NO IN (SELECT IM_NO FROM TAG
+		WHERE TA_LABELTAG IN
+		<foreach collection="list" item="item" open="(" separator=","
+			close=")">
+			#{item}
+		</foreach>
+		OR TA_TEXTTAG IN
+		<foreach collection="list" item="item" open="(" separator=","
+			close=")">
+			#{item}
+		</foreach>
+		)
+		ORDER BY IM_SERVERNAME DESC
+	</select>
+	<select id="tattooshareList" resultMap="tattooshareDtoMap">
+		SELECT TS_WRITER,
+		TS_TITLE, IM_SERVERNAME, IM_FILEPATH, IM_NO, T.ME_NO
+		FROM TATTOOSHARE T JOIN IMG I
+		USING(IM_NO)
+		ORDER BY IM_SERVERNAME DESC
+	</select>
+	<insert id="insertTsList" parameterType="map">
+		INSERT INTO TATTOOSHARE 
+			(TS_NO,	ME_NO, TS_WRITER, TS_TITLE, TS_CONTENT, TS_REGDATE, TS_READCOUNT,
+			TS_GROUPNO, TS_STEP, IM_NO, TS_TITLETAB, TS_DELFLAG)
+		SELECT TS_NO_SEQ.NEXTVAL, A.*FROM(
+		<foreach collection="list" item="item" separator="UNION ALL" >
+			SELECT #{item.me_no} AS ME_NO,
+					#{item.ts_writer} AS TS_WRITER,
+					'작성 중' AS TS_TITLE,
+					'작성 중' AS TS_CONTENT,
+					SYSDATE AS TS_REGDATE,
+					0 AS TS_READCOUNT,
+					0 AS TS_GROUPNO,
+					0 AS TS_STEP,
+					#{item.im_no} AS IM_NO,
+					0 AS TS_TITLETAB,
+					'N' AS TS_DELFLAG
+			FROM DUAL
+		</foreach>)A
+	</insert>
+	<delete id="deleteTsList" parameterType="tattooshareDto">
+		DELETE FROM TATTOOSHARE
+		WHERE
+		<if test="im_no_list !=null">
+		IM_NO IN
+			<foreach collection="im_no_list" item="item" index="index" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
+	</delete>
+	<select id="selectOne" parameterType="int" resultType="tattooshareDto">
+		SELECT TS_NO, T.ME_NO, TS_WRITER, TS_TITLE, TS_CONTENT, TS_REGDATE, IM_NO, IM_SERVERNAME
+		FROM TATTOOSHARE T JOIN IMG I USING(IM_NO)
+		WHERE IM_NO = #{im_no}
+	</select>
+	<update id="update" parameterType="tattooshareDto">
+		UPDATE TATTOOSHARE SET 
+		TS_TITLE = #{ts_title},
+		TS_CONTENT = #{ts_content}
+		WHERE IM_NO = #{im_no}
+	</update>
+
+
+</mapper>
